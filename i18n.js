@@ -9,7 +9,10 @@ const zh = {
         remake: '重制',
     },
     error: {
-        permission: '请允许浏览器访问麦克风',
+        permission: '🔈 请允许浏览器访问麦克风 ⚠',
+    },
+    info: {
+        language: '🔈 Click 「声音之花」 To Change Language',
     }
 }
 
@@ -22,12 +25,21 @@ const en = {
         remake: 'Remake',
     },
     error: {
-        permission: 'Please allow the browser to access the microphone',
+        permission: '🔈 Please allow the browser to access the microphone ⚠',
+    },
+    info: {
+        language: '🔈 点击 [Sound Flower] 切换语言',
     }
 }
 
 function getNestedValue(obj, keys) {
     let current = obj;
+    if (typeof current === 'string') {
+        current = eval(current);
+    }
+    if (typeof keys === 'string') {
+        keys = keys.split('.');
+    }
     for (const key of keys) {
         if (current[key]) {
             current = current[key];
@@ -50,8 +62,7 @@ function compileDOM(node, language) {
             }
             parent.setAttribute('data-template', child.textContent);
             child.textContent = child.textContent.replace(/\{\{(\w+(?:\.\w+)*)\}\}/g, (match, p1) => {
-                const keys = p1.trim().split('.');
-                return getNestedValue(eval(language), keys);
+                return getNestedValue(eval(language), p1.trim());
             });
         } else {
             compileDOM(child, language);

@@ -24,18 +24,15 @@
                     alt=""><label>{{tools.stop}}</label></button>
             <button id="save" onclick="save()"><img src="assets/save.svg" alt=""><label>{{tools.save}}</label></button>
         </div>
-        <div class="message">
-            <p>📢 {{error.permission}} ⚠</p>
-        </div>
     </div>
 
     <script src="line.js"></script>
+    <script src="i18n.js"></script>
     <script>
         const record = document.getElementById('record');
         const stop = document.getElementById('stop');
         const remake = document.getElementById('remake');
         const container = document.querySelector('.container');
-        const message = document.querySelector('.message');
 
         const canvas = document.getElementById('canvas');
         const dpr = window.devicePixelRatio || 1;
@@ -60,6 +57,31 @@
 
         HTMLElement.prototype.show = function () {
             this.style.display = this.originalDisplay;
+        }
+
+        function showMessage(options = {}) {
+            const { type = 'error', text = '', duration = 3000, isClose = true } = options;
+            const node = document.createElement('div');
+            node.className = `message ${type}`;
+            node.innerHTML = `<span class="text">${text}</span>`;
+            function _removeNode() {
+                node.classList.add('hide');
+                node.addEventListener('transitionend', () => {
+                    node.remove();
+                })
+            }
+            const timer = setTimeout(_removeNode, duration);
+            if (isClose) {
+                const close = document.createElement('i');
+                close.className = 'close';
+                close.innerHTML = `<img src="assets/close.svg" alt="">`;
+                node.appendChild(close);
+                document.body.appendChild(node);
+                close.addEventListener('click', () => {
+                    clearTimeout(timer);
+                    _removeNode();
+                });
+            }
         }
 
         function updateCanvasSize() {
@@ -186,11 +208,7 @@
                                 recordFn();
                             })
                     } else if (result.state === 'denied') {
-                        message.classList.add('show');
-                        timeoutId && clearTimeout(timeoutId);
-                        timeoutId = setTimeout(() => {
-                            message.classList.remove('show');
-                        }, 3000);
+                        showMessage({ type: 'error', text: getNestedValue(language, 'error.permission'), duration: 3000 });
                     }
                 });
         }
@@ -234,11 +252,13 @@
             draw();
             updateCanvasSize();
             window.onresize = updateCanvasSize;
+            showMessage({ type: 'info', text: getNestedValue(language, 'info.language'), duration: 5000 });
         }
 
-        init();
+        window.addEventListener('load', () => {
+            init();
+        });
     </script>
-    <script src="i18n.js"></script>
 </body>
 
 </html>

@@ -11,7 +11,7 @@
 
 <body>
     <div id="app">
-        <h1 id="title">🎶 声音之花 🌸</h1>
+        <h1 id="title"><i>🎶</i>声音之花<i>🌸</i></h1>
         <div class="container">
             <canvas id="canvas"></canvas>
         </div>
@@ -31,13 +31,19 @@
         const record = document.getElementById('record');
         const stop = document.getElementById('stop');
         const remake = document.getElementById('remake');
-        const canvas = document.getElementById('canvas');
         const container = document.querySelector('.container');
         const message = document.querySelector('.message');
 
-        const devicePixelRatio = window.devicePixelRatio || 1;
+        const canvas = document.getElementById('canvas');
+        const dpr = window.devicePixelRatio || 1;
         const ctx = canvas.getContext('2d');
+        ctx.scale(dpr, dpr);
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
+
         const lines = [];
+        const MAX_LINES = 10000;
+
         let isRecording = false;
         let degree = Math.PI * 2;
         let ratio = 0.25;
@@ -55,16 +61,23 @@
         }
 
         function updateCanvasSize() {
-            canvas.width = (window.innerWidth - 40);
-            canvas.height = (window.innerHeight - 200);
+            const innerSize = Math.min(window.innerWidth, window.innerHeight);
+            const size = Math.max(innerSize / 2, innerSize - 540);
+            const setSize = innerSize < size * dpr ? size : size * dpr;
+            canvas.width = setSize;
+            canvas.height = setSize;
         }
 
 
         function save() {
             const a = document.createElement('a');
-            a.href = canvas.toDataURL();
-            a.download = 'sound-flower.png';
-            a.click();
+            canvas.toBlob((blob)=>{
+                a.download = 'sound-flower.png';
+                a.href = URL.createObjectURL(blob);
+                a.click();
+                URL.revokeObjectURL(a.href);
+                a.remove();
+            }, 'image/png');
         }
 
         function draw() {
@@ -74,6 +87,9 @@
             }
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             const baseOpacity = 0.3;
+            if (lines.length >= MAX_LINES) {
+                lines.shift();
+            }
             for (let i = 0; i < lines.length; i++) {
                 lines[i].opacity = (i + 1) / lines.length * (1 - baseOpacity) + baseOpacity;
                 lines[i].draw(ctx);
@@ -116,7 +132,7 @@
                             sum += Math.abs(dataArray[i]);
                         }
                         const average = sum / bufferLength;
-                        ratio = (1 - Math.min(1, Math.max(0, average / 63))) / 2;
+                        ratio = (1 - Math.min(1, Math.max(0.1, average / 63))) / 2;
                         const line = new Line(0, 0, 0, 0);
 
                         const color1 = colorList[Math.floor(time % colorList.length)].slice(1);
@@ -175,7 +191,7 @@
         function getLinePosition() {
             const centerX = canvas.width / 2;
             const centerY = canvas.height / 2;
-            const round = Math.min(centerX, centerY) * 3 / 4;
+            const round = Math.min(centerX, centerY) * 4 / 4;
             const lineLength = round / 2;
             return [centerX + round * Math.cos(degree) * ratio, centerY + round * Math.sin(degree) * ratio, centerX + round * Math.cos(degree) * (1 - ratio), centerY + round * Math.sin(degree) * (1 - ratio)]
         }

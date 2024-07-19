@@ -61,7 +61,7 @@
 
         function updateCanvasSize() {
             const innerSize = Math.min(window.innerWidth, window.innerHeight);
-            const isHorizontal = innerSize > window.innerHeight;
+            const isHorizontal = innerSize == window.innerHeight;
             const size = Math.max(innerSize / 2, isHorizontal ? innerSize - 48 : innerSize - 328);
             const setSize = innerSize < size * dpr ? size : size * dpr - 60;
             canvas.width = setSize;

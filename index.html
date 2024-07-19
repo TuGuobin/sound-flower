@@ -164,6 +164,8 @@
                 }).catch(error => {
                     if (error.name === 'PermissionDeniedError' || error.name === 'NotAllowedError') {
                         requestPermissionAgain();
+                    } else {
+                        alert(`${error.name}: ${error.message}`);
                     }
                 })
         }

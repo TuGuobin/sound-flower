@@ -6,23 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sound Flower 声音之花</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="font.css">
+    <link rel="stylesheet" href="./fonts/font.css">
 </head>
 
 <body>
     <div id="app">
-        <h1 id="title"><i>🎶</i>声音之花<i>🌸</i></h1>
+        <h1 id="title" onclick="changeLanguage()"><i>🎶</i>{{title}}<i>🌸</i></h1>
         <div class="container">
             <canvas id="canvas"></canvas>
         </div>
         <div class="controls">
-            <button id="remake"><img src="assets/remake.svg" alt=""><label>重制</label></button>
-            <button id="record"><img src="assets/play.svg" alt="" /><label>录制</label></button>
-            <button id="stop"><img src="assets/stop.svg" alt=""><label>停止</label></button>
-            <button id="save" onclick="save()"><img src="assets/save.svg" alt=""><label>保存</label></button>
+            <button id="remake" onclick="remakeFn()"><img src="assets/remake.svg" alt=""><label>{{tools.remake}}</label></button>
+            <button id="record" onclick="recordFn()"><img src="assets/play.svg" alt="" /><label>{{tools.record}}</label></button>
+            <button id="stop" onclick="stopFn()"><img src="assets/stop.svg" alt=""><label>{{tools.stop}}</label></button>
+            <button id="save" onclick="save()"><img src="assets/save.svg" alt=""><label>{{tools.save}}</label></button>
         </div>
         <div class="message">
-            <p>📢 请允许浏览器访问麦克风 ⚠</p>
+            <p>📢 {{error.permission}} ⚠</p>
         </div>
     </div>
 
@@ -71,7 +71,7 @@
 
         function save() {
             const a = document.createElement('a');
-            canvas.toBlob((blob)=>{
+            canvas.toBlob((blob) => {
                 a.download = 'sound-flower.png';
                 a.href = URL.createObjectURL(blob);
                 a.click();
@@ -95,8 +95,6 @@
                 lines[i].draw(ctx);
             }
         }
-
-        record.onclick = recordFn;
 
         function recordFn() {
             if (isRecording) return;
@@ -207,19 +205,19 @@
             }
         }
 
-        stop.onclick = () => {
+        function stopFn() {
             isRecording = false;
             container.classList.remove('recording');
             audioTrack.forEach(track => track.stop());
             audioTrack.splice(0, audioTrack.length);
             record.show();
             stop.hide();
-        };
+        }
 
-        remake.onclick = () => {
+        function remakeFn() {
             lines.splice(0, lines.length);
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-        };
+        }
 
         function init() {
             stop.hide();
@@ -231,6 +229,7 @@
 
         init();
     </script>
+    <script src="i18n.js"></script>
 </body>
 
 </html>

@@ -273,3 +273,31 @@ button {
 .message .close img {
     width: 100%;
 }
+
+.hide {
+    animation: hide .5s forwards;
+}
+
+@keyframes hide {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+.show {
+    animation: show .5s forwards;
+}
+
+@keyframes show {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}

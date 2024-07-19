@@ -25,7 +25,7 @@ function processLoading() {
     function _endLoading(delay = 1000) {
         updateLoading(100);
         setTimeout(() => {
-            app.show();
+            app.show(true);
             loading.hide();
             init();
         }, delay);

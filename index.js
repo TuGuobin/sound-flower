@@ -1,10 +1,24 @@
-HTMLElement.prototype.hide = function () {
-    this.originalDisplay = getComputedStyle(this).display === 'none' ? 'block' : getComputedStyle(this).display;
-    this.style.display = 'none';
+HTMLElement.prototype.hide = function (animate = false) {
+    if (!animate) {
+        this.style.display = 'none';
+        return;
+    }
+    this.classList.add('hide');
+    this.addEventListener('animationend', () => {
+        this.style.display = 'none';
+        this.classList.remove('hide');
+    })
 }
 
-HTMLElement.prototype.show = function () {
-    this.style.display = this.originalDisplay;
+HTMLElement.prototype.show = function ( animate = false) {
+    this.style.display = '';
+    if (!animate) {
+        return;
+    }
+    this.classList.add('show');
+    this.addEventListener('animationend', () => {
+        this.classList.remove('show');
+    })
 }
 
 const messageList = [];

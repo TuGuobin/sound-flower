@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'PingFang SC';
-    src: url('./PingFangSC.ttf') format('truetype');
+    src: url('../assets/PingFangSC.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;

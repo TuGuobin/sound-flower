@@ -1,0 +1,20 @@
+#loading {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#loading .line {
+    --percent: 0;
+    text-align: center;
+}
+
+#loading .line .inner {
+    font-size: 48px;
+    color: transparent;
+    background: linear-gradient(90deg, #0095ff calc(var(--percent) - 5%), #ededed calc(var(--percent) + 5%), #ededed);
+    background-size: 125% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+}

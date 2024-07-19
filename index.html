@@ -1,17 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sound Flower 声音之花</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="loading.css">
     <link rel="stylesheet" href="./fonts/font.css">
+    <script src="index.js"></script>
 </head>
 
 <body>
+    <div id="loading">
+        <div class="line">
+            <div class="inner">
+                <p>Sound Flower</p>
+                <p>声音之花</p>
+            </div>
+        </div>
+    </div>
     <div id="app">
-        <h1 id="title" onclick="changeLanguage()"><i>🎶</i>{{title}}<i>🌸</i></h1>
+        <h1 id="title" onclick="changeLanguageFn()"><i>🎶</i>{{title}}<i>🌸</i></h1>
         <div class="container">
             <canvas id="canvas"></canvas>
         </div>
@@ -26,6 +36,7 @@
         </div>
     </div>
 
+    <script src="loading.js"></script>
     <script src="line.js"></script>
     <script src="i18n.js"></script>
     <script>
@@ -50,38 +61,9 @@
         const audioTrack = [];
         let timeoutId = null;
 
-        HTMLElement.prototype.hide = function () {
-            this.originalDisplay = getComputedStyle(this).display === 'none' ? 'block' : getComputedStyle(this).display;
-            this.style.display = 'none';
-        }
-
-        HTMLElement.prototype.show = function () {
-            this.style.display = this.originalDisplay;
-        }
-
-        function showMessage(options = {}) {
-            const { type = 'error', text = '', duration = 3000, isClose = true } = options;
-            const node = document.createElement('div');
-            node.className = `message ${type}`;
-            node.innerHTML = `<span class="text">${text}</span>`;
-            function _removeNode() {
-                node.classList.add('hide');
-                node.addEventListener('transitionend', () => {
-                    node.remove();
-                })
-            }
-            const timer = setTimeout(_removeNode, duration);
-            if (isClose) {
-                const close = document.createElement('i');
-                close.className = 'close';
-                close.innerHTML = `<img src="assets/close.svg" alt="">`;
-                node.appendChild(close);
-                document.body.appendChild(node);
-                close.addEventListener('click', () => {
-                    clearTimeout(timer);
-                    _removeNode();
-                });
-            }
+        function changeLanguageFn() {
+            changeLanguage();
+            showMessage({ type: 'info', text: getNestedValue(language, 'info.change'), duration: 3000 });
         }
 
         function updateCanvasSize() {
@@ -254,10 +236,6 @@
             window.onresize = updateCanvasSize;
             showMessage({ type: 'info', text: getNestedValue(language, 'info.language'), duration: 5000 });
         }
-
-        window.addEventListener('load', () => {
-            init();
-        });
     </script>
 </body>
 

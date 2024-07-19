@@ -16,9 +16,12 @@
             <canvas id="canvas"></canvas>
         </div>
         <div class="controls">
-            <button id="remake" onclick="remakeFn()"><img src="assets/remake.svg" alt=""><label>{{tools.remake}}</label></button>
-            <button id="record" onclick="recordFn()"><img src="assets/play.svg" alt="" /><label>{{tools.record}}</label></button>
-            <button id="stop" onclick="stopFn()"><img src="assets/stop.svg" alt=""><label>{{tools.stop}}</label></button>
+            <button id="remake" onclick="remakeFn()"><img src="assets/remake.svg"
+                    alt=""><label>{{tools.remake}}</label></button>
+            <button id="record" onclick="recordFn()"><img src="assets/play.svg"
+                    alt="" /><label>{{tools.record}}</label></button>
+            <button id="stop" onclick="stopFn()"><img src="assets/stop.svg"
+                    alt=""><label>{{tools.stop}}</label></button>
             <button id="save" onclick="save()"><img src="assets/save.svg" alt=""><label>{{tools.save}}</label></button>
         </div>
         <div class="message">
@@ -61,13 +64,17 @@
 
         function updateCanvasSize() {
             const innerSize = Math.min(window.innerWidth, window.innerHeight);
-            const isHorizontal = window.innerHeight > window.innerWidth;
-            const size = Math.max(innerSize / 2, isHorizontal ? innerSize - 48 : innerSize - 328);
+            const isHorizontal = window.innerHeight > window.innerWidth * 1.4;
+            const size = isHorizontal ? window.innerWidth - 48 : window.innerHeight - 286;
             const setSize = innerSize < size * dpr ? size : size * dpr - 60;
             canvas.width = setSize;
             canvas.height = setSize;
+            clearCanvas();
         }
 
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
 
         function save() {
             const a = document.createElement('a');
@@ -85,7 +92,7 @@
             if (!isRecording) {
                 return;
             }
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            clearCanvas();
             const baseOpacity = 0.3;
             if (lines.length >= MAX_LINES) {
                 lines.shift();
@@ -218,7 +225,7 @@
 
         function remakeFn() {
             lines.splice(0, lines.length);
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            clearCanvas();
         }
 
         function init() {

@@ -156,13 +156,13 @@
 
 @keyframes rotate {
     0% {
-        transform: rotate(0deg);
+        transform: rotate(var(--start-degree, 0deg));
         opacity: 1;
         background-position: 0% 0%;
     }
 
     100% {
-        transform: rotate(360deg);
+        transform: rotate(calc(var(--start-degree, 0deg) + 360deg));
         opacity: 0.7;
         background-position: 100% 100%;
     }
@@ -199,79 +199,6 @@ button {
 
 #remake {
     margin-right: 6px;
-}
-
-.message {
-    color: #fff;
-    padding: 8px 12px;
-    border-radius: 4px;
-    font-size: 14px;
-    user-select: none;
-    position: absolute;
-    width: fit-content;
-    max-width: 80vw;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, calc(-50% - 50px));
-    opacity: 0;
-    z-index: 9999999;
-    animation: slideDown .5s forwards;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-}
-
-.message.hide {
-    animation: slideUp .5s forwards;
-}
-
-@keyframes slideUp {
-    0% {
-        opacity: 1;
-        transform: translate(-50%, -50%);
-    }
-
-    100% {
-        opacity: 0;
-        transform: translate(-50%, calc(-50% - 50px));
-    }
-}
-
-@keyframes slideDown {
-    0% {
-        opacity: 0;
-        transform: translate(-50%, calc(-50% - 50px));
-    }
-
-    100% {
-        opacity: 1;
-        transform: translate(-50%, -50%);
-    }
-}
-
-.error {
-    background-color: #ef4f4f;
-    border: 2px solid #ff0000;
-}
-
-.info {
-    background-color: #0095ff;
-    border: 2px solid #001aff;
-}
-
-.message .text {
-    flex: 1;
-}
-
-.message .close {
-    cursor: pointer;
-    width: 16px;
-    height: 16px;
-}
-
-.message .close img {
-    width: 100%;
 }
 
 .hide {

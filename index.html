@@ -11,6 +11,7 @@
     <title>Sound Flower 声音之花</title>
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/loading.css">
+    <link rel="stylesheet" href="./css/message.css">
     <link rel="stylesheet" href="./css/font.css">
     <script src="./js/index.js"></script>
 </head>
@@ -19,24 +20,38 @@
     <div id="loading">
         <div class="line">
             <div class="inner">
-                <p>Sound Flower</p>
-                <p>声音之花</p>
+                <span>Sound Flower</span>
+                <br>
+                <span>声音之花</span>
             </div>
         </div>
     </div>
     <div id="app">
-        <h1 id="title" onclick="changeLanguageFn()"><i>🎶</i>{{title}}<i>🌸</i></h1>
+        <h1 id="title" onclick="changeLanguageFn()">
+            <i>🎶</i>
+            <span>{{title}}</span>
+            <i>🌸</i>
+        </h1>
         <div class="container">
             <canvas id="canvas"></canvas>
         </div>
         <div class="controls">
-            <button id="remake" onclick="remakeFn()"><img src="assets/remake.svg"
-                    alt=""><label>{{tools.remake}}</label></button>
-            <button id="record" onclick="recordFn()"><img src="assets/play.svg"
-                    alt="" /><label>{{tools.record}}</label></button>
-            <button id="stop" onclick="stopFn()"><img src="assets/stop.svg"
-                    alt=""><label>{{tools.stop}}</label></button>
-            <button id="save" onclick="save()"><img src="assets/save.svg" alt=""><label>{{tools.save}}</label></button>
+            <button id="remake" onclick="remakeFn()">
+                <img src="assets/remake.svg" alt="">
+                <label>{{tools.remake}}</label>
+            </button>
+            <button id="record" onclick="recordFn()">
+                <img src="assets/play.svg" alt="" />
+                <label>{{tools.record}}</label>
+            </button>
+            <button id="stop" onclick="stopFn()">
+                <img src="assets/stop.svg" alt="">
+                <label>{{tools.stop}}</label>
+            </button>
+            <button id="save" onclick="save()">
+                <img src="assets/save.svg" alt="">
+                <label>{{tools.save}}</label>
+            </button>
         </div>
     </div>
 
@@ -118,6 +133,7 @@
                 .then(stream => {
                     isRecording = true;
                     container.classList.add('recording');
+                    document.documentElement.style.setProperty('--start-degree', `${degree}rad`);
                     record.hide();
                     stop.show();
 

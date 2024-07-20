@@ -9,8 +9,15 @@ function processLoading() {
     draw();
 
     function updateLoading(pct) {
-        current = Math.min(100, pct);
-        line.style.setProperty('--percent', `${current}%`);
+        const original = pct;
+        pct = (original - current) / 16;
+        function run() {
+            current = Math.min(100, current + pct);
+            line.style.setProperty('--percent', `${current}%`);
+        }
+        for (let i = 0; i < 16; i++) {
+            setTimeout(run, 16 * i);
+        }
     }
 
     function draw() {

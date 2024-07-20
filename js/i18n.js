@@ -14,6 +14,11 @@ const zh = {
     info: {
         language: '🔈 Click 「声音之花」 To Change Language',
         change: 'ℹ️ 切换为中文'
+    },
+    confirm: {
+        save: '❓ 保存图片时是否添加二维码链接',
+        confirm: '确认',
+        cancel: '取消',
     }
 }
 
@@ -31,6 +36,11 @@ const en = {
     info: {
         language: '🔈 点击 [Sound Flower] 切换语言',
         change: 'ℹ️ Change to English'
+    },
+    confirm: {
+        save: '❓ Do you want to add a QR code link to the image?',
+        confirm: 'Confirm',
+        cancel: 'Cancel',
     }
 }
 

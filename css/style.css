@@ -150,7 +150,7 @@
 .container.recording::after {
     opacity: 1;
     animation: rotate 10s linear infinite both;
-    background: linear-gradient(90deg, #0099ff 0%, #9900ff 33%, #00ff73 66%, #0099ff 100%);
+    background: linear-gradient(90deg, #0095ff 0%, #9900ff 33%, #00ff73 66%, #0095ff 100%);
     background-size: 200% 200%;
 }
 

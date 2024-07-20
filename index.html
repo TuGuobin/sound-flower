@@ -100,15 +100,44 @@
             ctx.clearRect(0, 0, canvas.width, canvas.height);
         }
 
-        function save() {
+        function saveBlob(blob, name) {
             const a = document.createElement('a');
-            canvas.toBlob((blob) => {
-                a.download = 'sound-flower.png';
-                a.href = URL.createObjectURL(blob);
-                a.click();
-                URL.revokeObjectURL(a.href);
-                a.remove();
-            }, 'image/png');
+            a.download = name;
+            a.href = URL.createObjectURL(blob);
+            a.click();
+            URL.revokeObjectURL(a.href);
+            a.remove();
+        }
+
+        function save() {
+            const SAVE_IMG_NAME = 'sound-flower.png';
+            showMessage({
+                type: 'info',
+                isConfirm: true,
+                isMask: true,
+                text: getNestedValue(language, 'confirm.save'),
+                confirm() {
+                    const poster = new Image();
+                    poster.src = './assets/poster.png';
+                    const cvs = document.createElement('canvas');
+                    const tempCtx = cvs.getContext('2d');
+                    poster.onload = () => {
+                        const margin = 25;
+                        cvs.width = poster.width;
+                        cvs.height = poster.height;
+                        tempCtx.drawImage(poster, 0, 0, poster.width, poster.height);
+                        tempCtx.drawImage(canvas, margin, margin, poster.width - 2 * margin, poster.width - 2 * margin);
+                        cvs.toBlob((blob) => {
+                            saveBlob(blob, SAVE_IMG_NAME);
+                        }, 'image/png');
+                    }
+                },
+                cancel() {
+                    canvas.toBlob((blob) => {
+                        saveBlob(blob, SAVE_IMG_NAME);
+                    })
+                }
+            })
         }
 
         function draw() {

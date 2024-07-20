@@ -38,13 +38,13 @@ const en = {
         change: 'ℹ️ Change to English'
     },
     confirm: {
-        save: '❓ Do you want to add a QR code link to the image?',
+        save: '❓ Do you want to add a QR code link to the website',
         confirm: 'Confirm',
         cancel: 'Cancel',
     }
 }
 
-function getNestedValue(obj, keys) {
+function getLangugeValue(obj, keys) {
     let current = obj;
     if (typeof current === 'string') {
         current = eval(current);
@@ -74,7 +74,7 @@ function compileDOM(node, language) {
             }
             parent.setAttribute('data-template', child.textContent);
             child.textContent = child.textContent.replace(/\{\{(\w+(?:\.\w+)*)\}\}/g, (match, p1) => {
-                return getNestedValue(eval(language), p1.trim());
+                return getLangugeValue(language, p1.trim());
             });
         } else {
             compileDOM(child, language);

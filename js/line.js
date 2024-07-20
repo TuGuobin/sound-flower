@@ -1,5 +1,5 @@
 class Line {
-    constructor(startX, startY, endX, endY, color = 'black', width = 1, opacity = 1) {
+    constructor(startX, startY, endX, endY, color = 'black', width = 0.75, opacity = 1) {
         this.color = color;
         this.width = width;
         this.opacity = opacity;
@@ -14,7 +14,7 @@ class Line {
         ctx.moveTo(this.startX, this.startY);
         ctx.lineTo(this.endX, this.endY);
         ctx.strokeStyle = this.color;
-        ctx.lineWidth = this.width * dpr;
+        ctx.lineWidth = this.width;
         ctx.globalAlpha = this.opacity;
         ctx.lineCap = 'round';
         ctx.lineJoin = 'round';

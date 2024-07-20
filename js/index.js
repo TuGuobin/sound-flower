@@ -36,9 +36,7 @@ function showMessage(options = {}) {
         const mask = document.createElement('div');
         mask.className = 'mask';
         node.appendChild(mask);
-        mask.addEventListener('click', () => {
-            _removeNode();
-        })
+        mask.addEventListener('click', _removeNode)
     }
     const inner = document.createElement('div');
     inner.className = `message ${type}`;

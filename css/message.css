@@ -5,7 +5,7 @@
     border-radius: 4px;
     font-size: 14px;
     user-select: none;
-    position: absolute;
+    position: fixed;
     width: fit-content;
     max-width: 80vw;
     top: 50%;
@@ -20,7 +20,7 @@
     gap: 8px;
 }
 
-.message.hide {
+.message-container.hide .message {
     animation: slideUp .5s forwards;
 }
 
@@ -70,4 +70,50 @@
 
 .message .close img {
     width: 100%;
+}
+
+.message.confirm {
+    flex-direction: column;
+}
+
+.message.confirm .btns {
+    display: flex;
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    line-height: 18px;
+    gap: 12px;
+}
+
+.message.confirm .btns button {
+    flex: 1;
+    cursor: pointer;
+    border-radius: 4px;
+    white-space: nowrap;
+}
+
+.message.confirm button.success {
+    flex-grow: 2;
+    background-color: #fff;
+    color: #0095ff;
+}
+
+.message.confirm button.cancel {
+    background-color: #fff3;
+}
+
+.message-container .mask {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background-color: #0003;
+    z-index: 9999999;
+    opacity: 1;
+}
+
+.message-container.hide .mask {
+    opacity: 0;
+    pointer-events: none;
 }

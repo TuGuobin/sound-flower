@@ -129,7 +129,7 @@ function recordFn() {
                     sum += Math.abs(dataArray[i]);
                 }
                 const average = sum / bufferLength;
-                ratio = (1 - Math.min(1, Math.max(0.05 + Math.random() / 10, average / 84))) / 2;
+                ratio = (1 - Math.min(1, Math.max(0.05 + Math.random() / 10, average / 64))) / 2;
                 const line = new Line(0, 0, 0, 0);
 
                 const color1 = colorList[Math.floor(time % colorList.length)].slice(1);

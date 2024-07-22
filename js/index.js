@@ -216,12 +216,22 @@ function remakeFn() {
     clearCanvas();
 }
 
+async function loadSVG() {
+    const svgs = document.querySelectorAll('svg');
+    for (let i = 0; i < svgs.length; i++) {
+        const svg = svgs[i];
+        const url = svg.getAttribute('data-url');
+        svg.outerHTML = await fetch(url).then(res => res.text());
+    }
+}
+
 function init() {
     stop.hide();
     record.show();
     draw();
     updateCanvasSize();
     window.onresize = updateCanvasSize;
+    requestAnimationFrame(loadSVG);
     showMessage({
         type: 'info',
         text: getLangugeValue(language, 'info.language'),

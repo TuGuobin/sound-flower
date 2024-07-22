@@ -12,8 +12,8 @@
 
 #loading .line .inner {
     font-size: 8vmin;
-    background-image: linear-gradient(0deg, #0095ff calc(var(--percent, 0%) - 5%), #ededed calc(var(--percent, 0%) + 5%), #ededed);
-    background-image: -webkit-linear-gradient(0deg, #0095ff calc(var(--percent, 0%) - 5%), #ededed calc(var(--percent, 0%) + 5%), #ededed);
+    background-image: linear-gradient(0deg, var(--primary-color, #0095ff) calc(var(--percent, 0%) - 5%), #ededed calc(var(--percent, 0%) + 5%), #ededed);
+    background-image: -webkit-linear-gradient(0deg, var(--primary-color, #0095ff) calc(var(--percent, 0%) - 5%), #ededed calc(var(--percent, 0%) + 5%), #ededed);
     background-size: 125% 100%;
     -webkit-background-clip: text;
     background-clip: text;

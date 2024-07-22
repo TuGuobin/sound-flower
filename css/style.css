@@ -36,3 +36,31 @@ button {
         opacity: 1;
     }
 }
+
+html {
+    color-scheme: light dark;
+    background-color: var(--bg-dark);
+}
+
+:root {
+    --primary-color: #0095ff;
+    --primary-color-dark: #0062a5;
+    --primary-color-transparent: #0095ff08;
+    --bg: #f6f6f6;
+    --bg-dark: #fff;
+    --color: #111;
+}
+
+svg path:not([fill]),
+svg path[fill^="#fff"],
+svg path[fill^="#000"] {
+    fill: var(--color);
+}
+
+@media screen and (prefers-color-scheme: dark) {
+    :root {
+        --bg: #0a0a0a;
+        --bg-dark: #111;
+        --color: #fff;
+    }
+}

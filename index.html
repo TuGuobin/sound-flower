@@ -7,6 +7,7 @@
     <meta name="author" content="TuGitee">
     <meta name="description" content="Sound Flower">
     <meta name="keywords" content="Sound Flower">
+    <link rel="preload" href="./assets/poster.png" as="image">
     <link rel="icon" href="./favicon.ico">
     <title>Sound Flower 声音之花</title>
     <link rel="stylesheet" href="./css/style.css">
@@ -37,19 +38,19 @@
         </div>
         <div class="controls">
             <button id="remake" onclick="remakeFn()">
-                <img src="assets/remake.svg" alt="">
+                <svg data-url="assets/remake.svg"></svg>
                 <label>{{tools.remake}}</label>
             </button>
             <button id="record" onclick="recordFn()">
-                <img src="assets/play.svg" alt="" />
+                <svg data-url="assets/play.svg"></svg>
                 <label>{{tools.record}}</label>
             </button>
             <button id="stop" onclick="stopFn()">
-                <img src="assets/stop.svg" alt="">
+                <svg data-url="assets/stop.svg"></svg>
                 <label>{{tools.stop}}</label>
             </button>
             <button id="save" onclick="save()">
-                <img src="assets/save.svg" alt="">
+                <svg data-url="assets/save.svg"></svg>
                 <label>{{tools.save}}</label>
             </button>
         </div>

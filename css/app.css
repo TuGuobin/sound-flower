@@ -92,15 +92,15 @@
     }
 
     33% {
-        box-shadow: 0 0 0 10vmax #0095ff08, 0 0 0 20vmax #0095ff08, 0 0 0 30vmax #0095ff08, 0 0 0 50vmax #0095ff08;
+        box-shadow: 0 0 0 10vmax var(--primary-color-transparent, #0095ff08), 0 0 0 20vmax var(--primary-color-transparent, #0095ff08), 0 0 0 30vmax var(--primary-color-transparent, #0095ff08), 0 0 0 50vmax var(--primary-color-transparent, #0095ff08);
     }
 
     66% {
-        box-shadow: 0 0 0 40px #0095ff08, 0 0 0 80px #0095ff08, 0 0 0 120px #0095ff08, 0 0 0 160px #0095ff08;
+        box-shadow: 0 0 0 40px var(--primary-color-transparent, #0095ff08), 0 0 0 80px var(--primary-color-transparent, #0095ff08), 0 0 0 120px var(--primary-color-transparent, #0095ff08), 0 0 0 160px var(--primary-color-transparent, #0095ff08);
     }
 
     100% {
-        box-shadow: 0 0 0 10vmax #0095ff08, 0 0 0 20vmax #0095ff08, 0 0 0 30vmax #0095ff08, 0 0 0 50vmax #0095ff08;
+        box-shadow: 0 0 0 10vmax var(--primary-color-transparent, #0095ff08), 0 0 0 20vmax var(--primary-color-transparent, #0095ff08), 0 0 0 30vmax var(--primary-color-transparent, #0095ff08), 0 0 0 50vmax var(--primary-color-transparent, #0095ff08);
     }
 }
 
@@ -113,9 +113,10 @@
     left: 5px;
     z-index: 0;
     border-radius: 50%;
+    transition: .5s;
     background:
-        repeating-conic-gradient(#f9f9f9 0 25%, #fff 0 50%) 0 0 / 25px 25px,
-        repeating-conic-gradient(#f9f9f9 0 25%, #fff 0 50%) 0 0 / 25px 25px;
+        repeating-conic-gradient(var(--bg, #f6f6f6) 0 25%, var(--bg-dark, #fff) 0 50%) 0 0 / 25px 25px,
+        repeating-conic-gradient(var(--bg, #f6f6f6) 0 25%, var(--bg-dark, #fff) 0 50%) 0 0 / 25px 25px;
 }
 
 .container.recording::before {
@@ -144,7 +145,7 @@
 .container.recording::after {
     opacity: 1;
     animation: rotate 10s linear infinite both;
-    background: linear-gradient(90deg, #0095ff 0%, #9900ff 33%, #00ff73 66%, #0095ff 100%);
+    background: linear-gradient(90deg, var(--primary-color, #0095ff) 0%, #9900ff 33%, #00ff73 66%, var(--primary-color, #0095ff) 100%);
     background-size: 200% 200%;
 }
 
@@ -180,8 +181,8 @@
     width: 40px;
 }
 
-#record img,
-#stop img {
+#record svg,
+#stop svg {
     width: 36px;
     height: 36px;
 }

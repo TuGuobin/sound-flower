@@ -60,7 +60,7 @@ function save() {
             const cvs = document.createElement('canvas');
             const tempCtx = cvs.getContext('2d');
             poster.onload = () => {
-                const margin = 25;
+                const margin = 30;
                 cvs.width = poster.width;
                 cvs.height = poster.height;
                 tempCtx.drawImage(poster, 0, 0, poster.width, poster.height);

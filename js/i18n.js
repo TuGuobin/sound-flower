@@ -13,7 +13,8 @@ const zh = {
     },
     info: {
         language: '🔈 Click 「声音之花」 To Change Language',
-        change: 'ℹ️ 切换为中文'
+        change: 'ℹ️ 切换为中文',
+        sing: '🎙️ 点击「录制」唱一首拿手的歌曲绘画出专属于你的「声音之花」 🎵'
     },
     confirm: {
         save: '❓ 保存图片时是否添加二维码链接',
@@ -35,7 +36,8 @@ const en = {
     },
     info: {
         language: '🔈 点击 [Sound Flower] 切换语言',
-        change: 'ℹ️ Change to English'
+        change: 'ℹ️ Change to English',
+        sing: '🎙️ Click [Record] sing a song and draw a picture of your hand-made [sound-flower] 🎵'
     },
     confirm: {
         save: '❓ Do you want to add a QR code link to the website',

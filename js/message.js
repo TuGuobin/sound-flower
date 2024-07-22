@@ -5,7 +5,7 @@ function showMessage(options = {}) {
         messageList[messageList.length - 1]._removeNode();
         messageList.pop();
     }
-    const { type = 'error', text = '', duration = 3000, isClose = true, isConfirm = false, isMask = false, confirmText = getLangugeValue(language, 'confirm.confirm'), cancelText = getLangugeValue(language, 'confirm.cancel'), confirm = () => {}, cancel = () => {} } = options;
+    const { type = 'error', text = '', duration = 3000, isClose = true, isConfirm = false, isMask = false, confirmText = getLangugeValue(language, 'confirm.confirm'), cancelText = getLangugeValue(language, 'confirm.cancel'), confirm = () => {}, cancel = () => {}, close = () => {} } = options;
     const node = document.createElement('div');
     node.className = 'message-container';
     document.body.appendChild(node);
@@ -26,6 +26,7 @@ function showMessage(options = {}) {
         node.classList.add('hide');
         node.addEventListener('animationend', () => {
             node.remove();
+            requestAnimationFrame(close);
         })
     }
     if (!isConfirm && isClose) {

@@ -222,5 +222,12 @@ function init() {
     draw();
     updateCanvasSize();
     window.onresize = updateCanvasSize;
-    showMessage({ type: 'info', text: getLangugeValue(language, 'info.language'), duration: 5000 });
+    showMessage({
+        type: 'info',
+        text: getLangugeValue(language, 'info.language'),
+        duration: 5000,
+        close() {
+            showMessage({ type: 'info', text: getLangugeValue(language, 'info.sing'), duration: 5000 })
+        }
+    });
 }

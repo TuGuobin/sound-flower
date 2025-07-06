@@ -26,14 +26,14 @@ function changeLanguageFn() {
 }
 
 function updateCanvasSize() {
-    const size = Math.max(0, Math.min(window.innerWidth * .8, window.innerHeight - 328));
+    const size = Math.max(0, Math.min(window.innerWidth * .8, window.innerHeight - 218));
     if (prevSize === size) return;
     prevSize = size;
     canvas.width = size * dpr * 2;
     canvas.height = size * dpr * 2;
     canvas.style.width = size + 'px';
     canvas.style.height = size + 'px';
-    showMessage({ type: 'info', text: getLangugeValue(language, 'info.resize'), duration: 1000, isClose: false });
+    showMessage({ type: 'info', text: getLangugeValue(language, 'info.resize'), duration: 1000 });
     remakeFn();
 }
 

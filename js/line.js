@@ -1,5 +1,5 @@
 class Line {
-    constructor(startX, startY, endX, endY, color = 'black', width = 0.75, opacity = 1) {
+    constructor(startX, startY, endX, endY, color = 'black', width = 1.5, opacity = 1) {
         this.color = color;
         this.width = width;
         this.opacity = opacity;

@@ -18,6 +18,7 @@ let ratio = 0.25;
 const colorList = ['#ff0000', '#ffa500', '#ffff00', '#008000', '#00ffff', '#0000ff', '#800080'];
 const audioTrack = [];
 let timeoutId = null;
+let prevSize = 0;
 
 function changeLanguageFn() {
     changeLanguage();
@@ -25,13 +26,15 @@ function changeLanguageFn() {
 }
 
 function updateCanvasSize() {
-    const innerSize = Math.min(window.innerWidth, window.innerHeight);
-    const isHorizontal = window.innerHeight > window.innerWidth * 1.4;
-    const size = isHorizontal ? window.innerWidth - 48 : window.innerHeight - 286;
-    const setSize = innerSize < size * dpr ? size : size * dpr - 60;
-    canvas.width = setSize;
-    canvas.height = setSize;
-    clearCanvas();
+    const size = Math.max(0, Math.min(window.innerWidth * .8, window.innerHeight - 328));
+    if (prevSize === size) return;
+    prevSize = size;
+    canvas.width = size * dpr * 2;
+    canvas.height = size * dpr * 2;
+    canvas.style.width = size + 'px';
+    canvas.style.height = size + 'px';
+    showMessage({ type: 'info', text: getLangugeValue(language, 'info.resize'), duration: 1000, isClose: false });
+    remakeFn();
 }
 
 function clearCanvas() {
@@ -130,7 +133,6 @@ function recordFn() {
                 }
                 const average = sum / bufferLength;
                 ratio = (1 - Math.min(1, Math.max(0.05 + Math.random() / 10, average / 64))) / 2;
-                const line = new Line(0, 0, 0, 0);
 
                 const color1 = colorList[Math.floor(time % colorList.length)].slice(1);
                 const color2 = colorList[Math.floor((time + 1) % colorList.length)].slice(1);
@@ -154,7 +156,7 @@ function recordFn() {
 
                 const interpolatedColor = `#${((r << 16) | (g << 8) | b).toString(16).padStart(6, '0')}`;
 
-                line.color = interpolatedColor;
+                const line = new Line(0, 0, 0, 0, interpolatedColor, 3);
                 line.set(...getLinePosition());
                 lines.push(line);
             }
@@ -230,7 +232,9 @@ function init() {
     record.show();
     draw();
     updateCanvasSize();
-    window.onresize = updateCanvasSize;
+    window.onresize = () => {
+        updateCanvasSize();
+    };
     requestAnimationFrame(loadSVG);
     showMessage({
         type: 'info',
